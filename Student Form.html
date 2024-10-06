@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+	  <div class="container">
+		  <div class="jumbotron bg-success">
+			  <h1>Student Form</h1>
+		  </div>
+		  <div class="row">
+			  <div class="col-2">
+				  Name
+			  </div>
+			  <div class="col-4">
+				  <input type="text" id="name" class="form-control">
+			  </div>
+			  <div class="col-2">
+				  Father Name
+			  </div>
+			  <div class="col-4">
+				  <input type="text" id="fathername" class="form-control">
+			  </div>
+		  </div>
+		  <br>
+		  <div class="row">
+			  <div class="col-2">
+				  Email
+			  </div>
+			  <div class="col-4">
+				  <input type="text" id="email" class="form-control">
+			  </div>
+			  <div class="col-2">
+				  City
+			  </div>
+			  <div class="col-4">
+				  <input type="text" id="city" class="form-control">
+			  </div>
+		  </div>
+		  <button class="btn bg-success" id="btn" onClick="fun()">Submit</button>
+		  <br><br><br>
+		  <table id="stable" class="table table-bordered table-striped table-dark">
+		  	<tr>
+				<th>SrNo</th>
+				<th>Name</th>
+				<th>Father Name</th>
+				<th>Email</th>
+				<th>City</th>
+				<th>Action</th>
+			</tr>
+		  </table>
+	  </div>
+    
+
+	  
+	  
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>	<script>
+		SrNo = 1;
+		function fun(){
+		var Name = document.getElementById("name").value;
+		var FatherName = document.getElementById("fathername").value;
+		var Email = document.getElementById("email").value;
+		var City = document.getElementById("city").value;
+		
+//		alert(Name + Email + City + FatherName);	
+			
+		var Data = "<tr id='trr"+SrNo+"'><td>"+SrNo+"</td><td>"+Name+"</td><td>"+FatherName+"</td><td>"+Email+"</td><td>"+City+"</td><td><button id='btndel"+SrNo+"' onclick='removerow("+SrNo+")' class='btn btn-danger btndel'>Delete</button></td></tr>";	
+			
+		SrNo += 1;
+			
+		document.getElementById("stable").innerHTML += Data; 	
+			
+		document.getElementById("name").value = "";	
+		document.getElementById("fathername").value = "";	
+		document.getElementById("email").value = "";	
+		document.getElementById("city").value = "";	
+		document.getElementById("name").focus();	
+		
+		}
+	  	function removerow(id){
+			if(confirm("Do you want to delete")){
+			document.getElementById('trr' + id).remove();
+			}
+		}
+	  	
+	</script>  
+  </body>
+</html>

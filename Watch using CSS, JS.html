@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Untitled Document</title>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+			box-sizing: border-box;
+		}
+
+		body {
+			background: #2f363e;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+		}
+
+		.cont {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			background: #2f363e;
+			flex-direction: column;
+			/*			min-height: 500px;*/
+			border-top-left-radius: 50%;
+			border-top-right-radius: 50%;
+			box-shadow:
+				25px 25px 75px rgba(0, 0, 0, 0.75),
+				10px 20px 70px rgba(0, 0, 0, 25),
+				inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+				inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+				inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+		}
+
+		.clock {
+			position: relative;
+			width: 450px;
+			height: 450px;
+			background: #2f363e;
+			border-radius: 50%;
+			box-shadow:
+				10px 20px 50px rgba(0, 0, 0, 0.25),
+				inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+				inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+				inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 30px;
+		}
+
+		.clock::before {
+			content: "";
+			position: absolute;
+			width: 8px;
+			height: 8px;
+			background: black;
+			border-radius: 50%;
+			border: 2px solid white;
+			z-index: 1000;
+		}
+
+		.clock span {
+			position: absolute;
+			inset: 20px;
+			color: white;
+			text-align: center;
+			transform: rotate(calc(30deg *var(--i)))
+		}
+
+		.clock span b {
+			font-size: 1.5rem;
+			opacity: 0.35;
+			transform: rotate(calc(-30deg *var(--i)));
+			display: inline-block;
+		}
+
+		.circle {
+			position: absolute;
+			width: 330px;
+			height: 330px;
+			border: 2px solid rgba(0, 0, 0, 0.25);
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+			z-index: 10;
+		}
+
+		.circle i {
+			position: absolute;
+			width: 6px;
+			height: 50%;
+			background: var(--color);
+			opacity: 0.75;
+			transform-origin: bottom;
+			transform: scaleY(0.5);
+			z-index: 9;
+		}
+
+		.circle:nth-child(1) i {
+			width: 2px;
+		}
+
+		.circle:nth-child(2) i {
+			width: 6px;
+		}
+
+		.circle2 {
+			position: absolute;
+			width: 275px;
+			height: 275px;
+			border: 2px solid rgba(0, 0, 0, 0.25);
+			border-radius: 50%;
+		}
+
+		.circle3 {
+			position: absolute;
+			width: 220px;
+			height: 220px;
+			border: 2px solid rgba(0, 0, 0, 0.25);
+			border-radius: 50%;
+			z-index: 8;
+		}
+
+		.circle::before {
+			content: "";
+			position: absolute;
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			top: -8px;
+			box-shadow: 0 0 20px var(--color),
+				0 0 20px var(--color);
+			background: var(--color);
+		}
+
+		/*	Digital Clock		*/
+
+		#time {
+			display: flex;
+			font-size: 2.3em;
+			font-weight: 600;
+			padding: 10px 20px;
+			margin-bottom: 40px;
+			border-radius: 40px;
+			border: 2px solid rgba(0, 0, 0, 0.5);
+			box-shadow:
+				5px 5px 10px rgba(0, 0, 0, 0.5),
+				inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+				inset -5px -5px 15px rgba(0, 0, 0, 0.75)
+		}
+
+		#time div {
+			font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+			position: relative;
+			width: 60px;
+			text-align: center;
+			font-weight: 500;
+			color: var(--color);
+		}
+
+		#time div:nth-child(1)::after,
+		#time div:nth-child(2)::after {
+			position: absolute;
+			content: ":";
+			right: -4px;
+		}
+
+		#time div:nth-child(4) {
+			font-size: 1.3rem;
+			top: 3px;
+			display: flex;
+			color: white;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#time div:nth-child(2)::after {
+			animation: animate 1s steps(1) infinite;
+		}
+
+		@keyframes animate {
+			0% {
+				animation-delay: 1s;
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="cont">
+		<div class="clock">
+
+			<div class="circle" id="sc" style="--color:#04fc43;"><i></i></div>
+			<div class="circle circle2" id="mn" style="--color: #fee800;"><i></i></div>
+			<div class="circle circle3" id="hr" style="--color: #ff2972;"><i></i></div>
+
+			<span style="--i:1;"><b>1</b></span>
+			<span style="--i:2;"><b>2</b></span>
+			<span style="--i:3;"><b>3</b></span>
+			<span style="--i:4;"><b>4</b></span>
+			<span style="--i:5;"><b>5</b></span>
+			<span style="--i:6;"><b>6</b></span>
+			<span style="--i:7;"><b>7</b></span>
+			<span style="--i:8;"><b>8</b></span>
+			<span style="--i:9;"><b>9</b></span>
+			<span style="--i:10;"><b>10</b></span>
+			<span style="--i:11;"><b>11</b></span>
+			<span style="--i:12;"><b>12</b></span>
+		</div>
+		<div id="time">
+			<div id="hours" style="--color:  #ff2972">00</div>
+			<div id="mins" style="--color:#fee800">00</div>
+			<div id="secs" style="--color: #04fc43">00</div>
+			<div id="ampm">AM</div>
+		</div>
+	</div>
+
+	<script>
+
+		let hr = document.querySelector('#hr');
+		let mn = document.querySelector('#mn');
+		let sc = document.querySelector('#sc');
+
+		setInterval(() => {
+			let day = new Date();
+			let hh = day.getHours() * 30;
+			let mm = day.getMinutes() * 6;
+			let ss = day.getSeconds() * 6;
+
+			hr.style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
+			mn.style.transform = `rotateZ(${mm}deg)`;
+			sc.style.transform = `rotateZ(${ss}deg)`;
+
+			// Digital Clock
+
+			let hours = document.getElementById('hours');
+			let mins = document.getElementById('mins');
+			let secs = document.getElementById('secs');
+			let ampm = document.getElementById('ampm');
+
+			let h = new Date().getHours();
+			let m = new Date().getMinutes();
+			let s = new Date().getSeconds();
+
+			// AM PM
+			let am = h >= 12 ? "PM" : "AM";
+
+			//	convert 24hr clock to 12hr clock
+			if (h > 12) {
+				h = h - 12;
+			}
+
+			//	add zero before single digit number
+			h = (h < 10) ? "0" + h : h
+			m = (m < 10) ? "0" + m : m
+			s = (s < 10) ? "0" + s : s
+
+			hours.innerHTML = h;
+			mins.innerHTML = m;
+			secs.innerHTML = s;
+			ampm.innerHTML = am;
+
+		})
+
+	</script>
+</body>
+
+</html>

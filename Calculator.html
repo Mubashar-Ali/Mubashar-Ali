@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Calculator</title>
+<style>
+	.calculator{
+		font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+		transform: translate(100%,25%);
+		width: 30%;
+/*		height: 500px;*/
+		background: beige;
+		padding: 10px;
+/*		padding-bottom: -15px;*/
+		border-radius: 10px;
+	}
+	td:active{
+		background: silver;
+		font-size: 2rem;
+	}
+	.theme td:active{
+		background: #3c3c3c;
+		color: white;
+	}
+	.oper:active{
+		background: white;
+	}
+	.theme .oper:active{
+		background: black;
+	}
+	#dot{
+		font-size: 3rem;
+		font-weight: bold;
+	}
+	.screen{
+		overflow: hidden;
+		margin-top: 0px;
+		background: white;
+		height: 120px;
+		text-align: right;
+		font-size: 2rem;
+	}
+	table{
+		background: beige;
+		font-size: 2rem;
+		text-align: center;
+		width: 100%;
+		height: 380px;
+	}
+	.theme table{
+		background: rgba(37,26,26,1.00)
+	}
+	td{
+		background: white;
+		padding: 15px 0px;
+		box-shadow: 0 0 0.7px 0.7px black;
+	}
+	td::not(#equal){
+		background: black;
+		color: white;
+		cursor: pointer;
+	}
+	.theme #ccc{
+		background:red;
+		color:white;
+	}
+   #equal{
+		background: rgba(9,220,191,1.00);
+		cursor: pointer;
+	}
+	.theme{
+		transition: 0.5s;
+		background: #3c3c3c;
+		color: white;
+	}
+	.theme #equal{
+		background-color: orange;
+		color: white
+	}
+	.theme td{
+		background: black;
+	}
+	.ttt{
+		width: 30px;
+		height: 30px;
+		background: black;
+		border-radius: 100%;
+		float: right;
+	}
+	.theme .ttt{
+		background: white;
+	}
+	.oper{
+		background: rgba(202,196,196,1.00);
+		color: black;
+	}
+	.theme .oper{
+		background: #3c3c3c;
+		color:white;
+	}
+	#ccc{
+		background: red;
+		color: white;
+	}
+	.theme #equal{
+		background: green;
+	}
+	.theme .screen{
+		color:white;
+		background: black;
+	}
+</style>
+</head>
+
+<body>
+	<div id="calc" class="calculator">
+		<p style="font-size: 3rem; font-weight: bold; margin: 0px;display: inline-block">Calculator</p>
+		<button id="theme" class="ttt" onClick="fun()"></button>
+		<div class="screen">
+		<h1 id="result"></h1>
+		</div>
+		<table cellspacing="10" border="0">
+			<tr>
+				<td>7</td>
+				<td>8</td>
+				<td>9</td>
+				<td class="oper">/</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+				<td class="oper">x</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td class="oper">-</td>
+			</tr>
+			<tr>
+				<td id="dot">.</td>
+				<td>0</td>
+				<td id="equal">=</td>
+				<td class="oper">+</td>
+			</tr>
+			<tr>
+				<td colspan="4" id="ccc">Clear All</td>	
+			</tr>
+		</table>
+	</div>
+	
+	<script>
+		//Theme
+		function fun(){
+		document.getElementById("calc").classList.toggle("theme");	
+		}
+		
+		//Calculator
+		var td = document.querySelectorAll("td");
+		var result = document.getElementById("result");
+		
+		for(let i=0; i<td.length; i++){
+			td[i].addEventListener("click", function(){
+				
+				if(this.innerHTML=="="){
+					result.innerHTML = eval(result.innerHTML)
+				}
+				else{
+					if(this.innerHTML=="x"){
+						result.innerHTML += "*"
+					}
+					else if(this.innerHTML=="Clear All"){
+						result.innerHTML = ""
+					}
+					else{
+						result.innerHTML += this.innerHTML;	
+					}
+						
+				}
+			});
+		}
+		
+		
+	</script>
+</body>
+</html>

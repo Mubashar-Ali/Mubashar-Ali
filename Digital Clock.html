@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+			box-sizing: border-box;
+		}
+		body{
+			margin:0px;
+			padding: 0px;
+			height: 100vh;
+/*			background: silver;*/
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		h2{
+			padding: 30px 0px;
+			font-size: 30px;
+			font-weight: 500;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.time{
+			display: inline-block;
+			position: relative;
+			margin: 10px;
+			-webkit-box-reflect: below 1px
+			linear-gradient( transparent, transparent, white)
+		}
+		.time span{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.time span:nth-child(1){
+			background: #030D5A;
+			height: 50px;
+			width: 180px;
+			color: white;
+			font-size: 25px;
+			font-weight: 400;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.time:nth-of-type(2) span:nth-child(1){
+			background: #0A5701;
+		}
+		.time:nth-of-type(3) span:nth-child(1){
+			background:  rgba(112,3,5,1.00);
+		}
+		.time:nth-of-type(4) span:nth-child(1){
+			background: rgba(91,3,80,1.00);
+		}
+		.time span:nth-child(2){
+			height: 150px;
+			background: #362793;
+			color: white;
+			font-size: 90px;
+			font-weight: 700;
+		}
+		.time:nth-of-type(2) span:nth-child(2){
+			background: #239F38;
+		}
+		.time:nth-of-type(3) span:nth-child(2){
+			background: rgba(212,29,32,1.00);
+		}
+		.time:nth-of-type(4) span:nth-child(2){
+			background: rgba(178,33,204,1.00);
+		}
+		
+	</style>
+</head>
+
+<body bgcolor="lightblue">
+	<div class="cont">
+		<h2>THIS IS THE CURRENT TIME.</h2>
+		<div class="time">
+			<span>Hours</span>
+			<span id="hr">00</span>
+		</div>
+		<div class="time">
+			<span>Minutes</span>
+			<span id="min">00</span>
+		</div>
+		<div class="time">
+			<span>Seconds</span>
+			<span id="sec">00</span>
+		</div>
+		<div class="time">
+			<span>Period</span>
+			<span id="prd">AM</span>
+		</div>
+
+	</div>
+	
+	
+	
+	
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+<script>	
+	$(document).ready(function(){
+		function showTime() {
+			// current Time
+			var date = new Date();
+			
+			// make variables to get hours, mins and secs
+			var hours = date.getHours();
+			var mins = date.getMinutes();
+			var secs = date.getSeconds();
+			
+			// AM, PM   setting
+			var session = 'AM';
+			
+			// condition for time behavior
+			if(hours == 0){
+				hours=12;
+			}
+			
+			if(hours >= 12) {
+				session = 'PM'
+			}
+			
+			if(hours > 12){
+				hours = hours 	- 12;
+			}
+			
+				hours = hours < 10 ? "0" + hours : hours;
+				mins =  mins  < 10 ? "0" + mins : mins;
+				secs =  secs  < 10 ? "0" + secs : secs;
+			
+			
+			// set time in <span>
+			$('#hr').text(hours);
+			$('#min').text(mins);
+			$('#sec').text(secs);
+			$('#prd').text(session);
+			
+			// change time in every 1 sec
+			setTimeout(showTime,1000);
+		}
+		showTime();
+	});
+	
+</script>
+	
+</body>
+</html>
